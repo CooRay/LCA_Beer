@@ -1,9 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { IBeer } from "../interfaces/ibeer";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class BeerService {
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
+  getAll(): Observable<IBeer[]> {
+    return this.http.get<IBeer[]>("https://api.punkapi.com/v2/beers");
+  }
 }
